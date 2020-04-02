@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -95,7 +95,8 @@ def follow_unfollow(request):
     }
     if request.is_ajax():
         return HttpResponse(json.dumps(data), content_type='application/json')
-
+    else:
+        raise Http404()
 
 
 

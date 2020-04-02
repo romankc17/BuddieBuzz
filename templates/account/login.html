@@ -1,25 +1,56 @@
-{% extends 'base.html' %}
-{%block title%}Blog-login{%endblock%}
+{%extends 'base.html'%}
 
+{% load static %}
+
+{%block title%}
+	BuddieBuzz Login
+{%endblock%}
+
+{%block static%}
+	<link rel="stylesheet" type="text/css" href="{% static 'account/css/login.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+{%endblock%}
 {% block content %}
+	<div class="container">
+		<div class="img">
+			<img src="{% static 'account/img/bg.svg' %}">
+		</div>
+		<div class="login-content">
+			<form method="POST">
+				{% csrf_token %}
+				<img src="{% static 'account/img/avatar.png' %}">
+				<h2 class="title">Welcome</h2>
+           		<div class="input-div one">
+           		   <div class="i">
+           		   		<i class="fas fa-user"></i>
+           		   </div>
+           		   <div class="div">
+           		   		<h5>Username</h5>
+<!--           		   		<input type="text" class="input">-->
+					   		{{form.username}}
+           		   </div>
+           		</div>
+           		<div class="input-div pass">
+           		   <div class="i"> 
+           		    	<i class="fas fa-lock"></i>
+           		   </div>
+           		   <div class="div">
+           		    	<h5>Password</h5>
+<!--           		    	<input type="password" class="input">-->
+					   		{{form.password}}
+            	   </div>
+            	</div>
+            	<a href="#">Forgot Password?</a>
+				<input type="submit" class="btn" value="Login">
+				<button  class="btn" >Create an Account </button>
+            </form>
 
-
-<div class='content-section'>
-  <form method='POST'>
-    {% csrf_token %}
-    <fieldset class="form-group">
-      <legend class="border-bottom mb-4">Log In</legend>
-      {{form.as_p}}
-    </fieldset>
-    <div class='form-group'>
-      <button class='btm btn-outline-info' type="submit">Login</button>
-
+        </div>
     </div>
-  </form>
 
-  <div class="border-top pt-3">
-    <small class="text-muted">Need An Account?? <a class="ml-2" href="{% url 'register' %}">Sign Up</a></small>
-  </div>
-</div>
+{%endblock%}
 
-{% endblock %}
+{%block script%}
+	<script type="text/javascript" src="account/js/main.js"></script>
+{%endblock%}
