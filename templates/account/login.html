@@ -1,17 +1,23 @@
 {%extends 'base.html'%}
 
-{% load static %}
+<!--{% load static %}-->
+{% load widget_tweaks %}
 
 {%block title%}
 	BuddieBuzz Login
 {%endblock%}
 
+
 {%block static%}
+	<style >
+		.blue{background-color: blue;}
+	</style>
 	<link rel="stylesheet" type="text/css" href="{% static 'account/css/login.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 {%endblock%}
 {% block content %}
+
 	<div class="container">
 		<div class="img">
 			<img src="{% static 'account/img/bg.svg' %}">
@@ -20,15 +26,21 @@
 			<form method="POST">
 				{% csrf_token %}
 				<img src="{% static 'account/img/avatar.png' %}">
-				<h2 class="title">Welcome</h2>
+				<h3 class="title">Welcome</h3>
+				{% if form.errors %}
+					<div class="alert alert-error">
+						<a class="close" data-dismiss="alert" href="#">x</a>
+						Incorrect Username or Password!
+					</div>
+					{% endif %}
            		<div class="input-div one">
            		   <div class="i">
            		   		<i class="fas fa-user"></i>
            		   </div>
            		   <div class="div">
-           		   		<h5>Username</h5>
+
 <!--           		   		<input type="text" class="input">-->
-					   		{{form.username}}
+					   		{{form.username|attr:"placeholder:Username" }}
            		   </div>
            		</div>
            		<div class="input-div pass">
@@ -36,15 +48,18 @@
            		    	<i class="fas fa-lock"></i>
            		   </div>
            		   <div class="div">
-           		    	<h5>Password</h5>
+
 <!--           		    	<input type="password" class="input">-->
-					   		{{form.password}}
+					   		{{ form.password|attr:"placeholder:Password" }}
+
             	   </div>
             	</div>
+
             	<a href="#">Forgot Password?</a>
 				<input type="submit" class="btn" value="Login">
-				<button  class="btn" >Create an Account </button>
+				<a  class="btn" href="{% url 'register' %}" >Create an Account </a>
             </form>
+
 
         </div>
     </div>
