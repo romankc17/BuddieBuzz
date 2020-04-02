@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{%block title%}Post-detail{%endblock%}
+{% block content %}    
+  <article class="media content-section">
+    <img class = 'rounded-circle'
+         style="height: 65px;  width: 65px;  margin-right: 16px;"
+         src="{{ object.author.profile.image.url }}">
+
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="{%url 'profile' object.author.username%}">{{ object.author }}</a>
+
+
+
+        
+
+
+        <small class="text-muted">{{ object.created|date:"F d, Y" }}</small>
+      </div>
+      <h2 class="article-title">{{ object.caption }}</h2>
+      
+      {% if object.author == user %}
+       <div>
+        <a class = "btn btn-secondary btn-sm my-1" href="{% url 'post_update' object.id %}">Edit</a>
+        <a class = "btn btn-danger btn-sm my-1" href="{% url 'post_delete' object.id %}">Delete</a>
+       </div>
+      {% endif %}
+      {% for img in object.image_set.all %}
+
+            <img src="{{img.image.url}}" class="img-fluid" alt="Responsive image">
+
+              {% endfor %}
+    </div>
+  </article>    
+{% endblock content %}

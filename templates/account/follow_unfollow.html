@@ -1,0 +1,228 @@
+<!--{%if profile.user != request.user %}-->
+<!--<div class="row m-1">-->
+<!--    <div class="col-2">-->
+<!--        <form action="{% url 'follow_unfollow' %}" method="POST">-->
+<!--                {% csrf_token %}-->
+
+<!--                {% if is_followed %}-->
+<!--                    <button type="submit" id='follow' name="profile_user" value="{{profile.user.username}}" class="btn btn-danger btn-sm my-2 mx-1">Unfollow</button>-->
+<!--                {% else %}-->
+<!--                    <button type="submit" id="follow" name="profile_user" value="{{profile.user.username}}" class="btn btn-primary btn-sm my-2 mx-1">Follow</button>-->
+<!--                {%endif%}-->
+<!--        </form>-->
+<!--    </div>-->
+<!--    <div class="col-2 ml-5">-->
+<!--        <button  class="mb-2 btn btn-success btn-danger btn-sm mx-2"><i class="fas fa-comment-dots"></i>&nbsp;Message</button>-->
+<!--    </div>-->
+<!--</div>-->
+<!--{%endif%}-->
+
+
+<!--<div class="m-auto profile-user-buttons">-->
+<!--    <button type="button" class="mb-2 btn btn-secondary" data-toggle="modal" data-target="#fgmod">Following{{ profile.followings.count|pluralize }}({{profile.followings.count}})</button>-->
+<!--    {%if profile.followings.count > 0 %}-->
+<!--    <div class="modal fade bd-example-modal-sm" id="fgmod" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">-->
+<!--          <div class="modal-dialog modal-sm">-->
+<!--            <div class="modal-content">-->
+<!--                <a href="#" class="list-group-item active">Following{{profile.followings.count|pluralize}}</a>-->
+<!--                {%for following in profile.followings.all%}-->
+<!--                    <a href="{%url 'profile' following.user.username%}" class="list-group-item"> @{{following.user}}</a>-->
+<!--                {%endfor%}-->
+<!--            </div>-->
+<!--          </div>-->
+<!--    </div>-->
+<!--    {%endif%}-->
+
+<!--        &lt;!&ndash;Followers button&ndash;&gt;-->
+
+<!--    <button type="button" class="mb-2 btn btn-secondary" data-toggle="modal" data-target="#frmod">Follower{{ profile.followers.count|pluralize }}({{profile.followers.count}})</button>-->
+<!--    {%if profile.followers.count > 0 %}-->
+<!--        <div class=" modal fade bd-example-modal-sm" tabindex="-1" id="frmod" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">-->
+<!--              <div class="m-auto modal-dialog modal-sm">-->
+<!--                <div class="m-auto modal-content">-->
+<!--                    <a href="#" class=" list-group-item active">Follower{{profile.followers.count|pluralize}}</a>-->
+<!--                    {%for follower in profile.followers.all%}-->
+<!--                        <a href="{%url 'profile' follower.user.username%}" class="list-group-item"> @{{follower.user}}</a>-->
+<!--                    {%endfor%}-->
+<!--                </div>-->
+<!--              </div>-->
+<!--        </div>-->
+<!--    {%endif%}-->
+
+<!--</div>-->
+
+
+
+{%if profile.user != request.user %}
+
+
+
+
+        <form id='folUn' action="{% url 'follow_unfollow' %}" method="POST">
+                {% csrf_token %}
+<button class="btn btn-success btn-sm my-2 mx-2" type="submit" id="follow" name="profile_user" value="{{profile.user.username}}">
+                {% if is_followed %}
+                    Unfollow
+                {% else %}
+                    Follow
+                {%endif%}
+
+</button>
+        </form>
+{%endif%}
+
+
+
+                                 <!-- posts-button -->
+                                 <!-- posts-button -->
+                           <button class="post btn btn-secondary btn-sm  my-2">2 posts</button>
+
+
+
+                                 <!-- about-button -->
+                                 <!-- about-button -->
+                                 <!-- As it contain POPup ,it's  little bit lengthy -->
+                           <button class="btn btn-primary btn-sm mx-2 my-2" data-toggle="modal" data-target="#ourModal"><i class="far fa-file-alt"></i>&nbsp;About</button>
+
+
+                                <!-- The Modal-here id is ourmodal -->
+                            <div class="modal" id="ourModal">
+
+                              <!-- modal-dialog-scrollable -->
+                              <!-- modal-dialog-scrollable -->
+                             <div class="modal-dialog modal-dialog-scrollable">
+
+                              <!-- modal-contant -->
+                              <!-- modal-contant -->
+                              <!-- modal-contant -->
+                              <div class="modal-content">
+
+                                 <!-- Modal Header -->
+                                 <div class="modal-header">
+                                 <h1 class="modal-title">About</h1>
+                                 <button type="button" class="close" data-dismiss="modal">×</button>
+                                  </div>
+
+                                  <!-- Modal body -->
+                                  <div class="modal-body">
+
+                                       <!-- about's popup -->
+                                       <!-- about's popup -->
+                                       <!-- about's popup -->
+
+
+
+                                       <!-- about's-education -->
+                                       <!-- about's-education -->
+                                       <!-- about's-education -->
+
+<!--                               <h4><i class="fas fa-graduation-cap"></i>&nbsp;&nbsp;Education- <strong>Butwal Multiple Campus</strong></h4>-->
+
+                                      <!-- about's-contact -->
+                                       <!-- about's-contact -->
+                                       <!-- about's-contact -->
+
+                                   <h4><i class="fas fa-tty"></i>&nbsp;&nbsp;Contact info <strong>Mobile:{{profile.phone_number}}</strong></h4>
+
+                                   <!-- about's-resident -->
+                                       <!-- about's-resident -->
+                                       <!-- about's-resident -->
+                                      <h4> <i class="fas fa-map-marker-alt"></i>&nbsp;&nbsp;Resident:
+                                   <ul>
+<!--                                   <li>Permanant:<strong>Kapilvastu</strong></li>-->
+                                   <li>City:<strong>Butwal</strong></li>
+                                     </ul>
+                                 </h4>
+
+                                 <!-- about's-basic info -->
+                                       <!-- about's-gender -->
+                                       <!-- about's-birthday -->
+                               <h4><i class="fas fa-address-card"></i>&nbsp;&nbsp;Basic info</h4>
+                                     <strong>
+                                       <ul>
+                                         <li>Gender
+                                           <ul>
+                                           <li>{{profile.get_gender_display}}</li>
+                                         </ul>
+                                         </li>
+                                       </ul>
+
+                                       <ul>
+                                         <li>Birthday
+                                           <ul>
+                                           <li>{{profile.dob}}</li>
+                                         </ul>
+                                         </li>
+                                       </ul>
+                                     </strong>
+
+
+                                     </div>
+
+                                     <!-- close-button-inside-popup -->
+                                     <!-- Modal footer -->
+                                     <div class="modal-footer">
+                                       <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                     </div>
+
+                                   </div>    <!-- model-contant-div -->
+                                 </div>   <!-- modal-dialog-scrollable-div -->
+                        </div>        <!-- The Modal-here id is ourmodal -div -->
+
+
+
+                        <!-- profile-user-job -->
+                        <!-- profile-user-job -->
+                        <!-- profile-user-job -->
+
+                        <div class="profile-user-job">
+                           <h5 style="color: aliceblue;"><u> Developer</u></h5>  </br>
+                        </div>
+                    </div>
+
+                    <!-- button-followers -->
+                    <!-- button-folowing  -->
+                    <!-- button-message  -->
+
+                    <!-- profile-user-buttons -->
+                    <div class="profile-user-buttons">
+
+                      <button class="btn btn-secondary btn-sm mx-2 " data-toggle="modal" data-target="#fgmod">Following<span class="badge">{{profile.followings.count}}</span></button>
+{%if profile.followings.count > 0 %}
+    <div class="modal fade bd-example-modal-sm" id="fgmod" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <a href="#" class="list-group-item active">Following{{profile.followings.count|pluralize}}</a>
+                {%for following in profile.followings.all%}
+                    <a href="{%url 'profile' following.user.username%}" class="list-group-item"> @{{following.user}}</a>
+                {%endfor%}
+            </div>
+          </div>
+    </div>
+    {%endif%}
+
+
+                      <button class="btn btn-secondary btn-sm " data-toggle="modal" data-target="#frmod">Followers<span class="badge">{{profile.followers.count}}</span></button>
+{%if profile.followers.count > 0 %}
+        <div class=" modal fade bd-example-modal-sm" tabindex="-1" id="frmod" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+              <div class="m-auto modal-dialog modal-sm">
+                <div class="m-auto modal-content">
+                    <a href="#" class=" list-group-item active">Follower{{profile.followers.count|pluralize}}</a>
+                    {%for follower in profile.followers.all%}
+                        <a href="{%url 'profile' follower.user.username%}" class="list-group-item"> @{{follower.user}}</a>
+                    {%endfor%}
+                </div>
+              </div>
+        </div>
+    {%endif%}
+
+
+
+
+
+                         <button class="btn btn-success btn-danger btn-sm mx-2"><i class="fas fa-comment-dots"></i>&nbsp;Message</button>
+
+
+                      </div> <!-- profile-user-buttons-div -->
+
+                          </div>    <!-- profile-user-title-div-->

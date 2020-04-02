@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{%block title%}Post-create{%endblock%}
+
+{% block content %}
+
+
+<div class='content-section'>
+  <form method='POST'>
+    {% csrf_token %}
+    <fieldset class="form-group">
+      <legend class="border-bottom mb-4">POST</legend>
+        {% for img in object.image_set.all %}
+
+            <img src="{{img.image.url}}" class="img-fluid" alt="Responsive image">
+
+              {% endfor %}
+      {{ form }}
+    </fieldset>
+    <div class='form-group'>
+   <button class='btm btn-outline-info' type="submit">Post</button>
+    </div>
+  </form>    
+
+</div>
+
+{% endblock %}
