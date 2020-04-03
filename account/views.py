@@ -1,8 +1,5 @@
 import json
-
-from django.contrib.auth.password_validation import validate_password
-from django.core.exceptions import ValidationError
-from django.http import HttpResponseRedirect, JsonResponse, HttpResponse, Http404
+from django.http import  HttpResponse, Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
@@ -57,7 +54,10 @@ def register(request):
 @login_required
 def profile_view(request, the_slug):
     profile = get_object_or_404 (Profile,user=User.objects.get(username=the_slug))
-    current_user = Profile.objects.get(user = request.user)
+    try:
+        current_user = Profile.objects.get(user = request.user)
+    except:
+        raise Http404('Create a Profile to view others Profile.')
     context={'profile':profile,
              'current_user':current_user,
              'is_followed':current_user.follows(profile),

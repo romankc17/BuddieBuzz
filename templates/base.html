@@ -2,7 +2,6 @@
 {% load static %}
 <html lang="en">
   <head>
-    <link rel="stylesheet" type="text/css" href="{%static 'style.css'%}">
     {%block static%} {%endblock%}
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -30,34 +29,9 @@
 
     <nav class="navbar mb-2  navbar-expand-lg navbar-light bg-dark">
       <div class="container">
-    <div class="row pl-2"><a class="navbar-brand" style="color: blue; font-weight: bold;" href="">BuddieBuzz</a></div>
+    <div class="row pl-2"><a class="navbar-brand" style="color: blue; font-weight: bold;" href="{%url 'home' %}">BuddieBuzz</a></div>
 
 
-
-  <div class=" px-10 spinner-grow text-primary" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-secondary" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-success" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-danger" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-warning" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-info" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-light" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
-<div class="spinner-grow text-dark" role="status">
-  <span class="sr-only">Loading...</span>
-</div>
 
 
   <button

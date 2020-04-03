@@ -1,5 +1,8 @@
 {% extends "base.html" %}
-{%block title%}Blog-home{%endblock%}
+{% load static %}
+{%block title%}Buddies-home{%endblock%}
+
+
 
 {% block content %}
 <a style="color: black; text-decoration:none; font-weight: bold;" href="{% url 'post_create' %}"><button type="button"  class="container btn btn-primary btn-lg btn-block mb-3" >
@@ -13,20 +16,46 @@
 
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2" href="#">{{ post.author }}</a>
+              <a class="mr-2" href="{{post.author.profile.get_absolute_url}}">{{ post.author }}</a>
               <small class="text-muted">{{ post.updated|date:"F d, Y" }}</small>
 
             </div>
-            <h3><a class="article-title" href="{% url 'post_detail' post.id %}">{{ post.caption }}</a></h3>
+
               {% for img in post.image_set.all %}
 
-            <img src="{{img.image.url}}" class="img-fluid" alt="Responsive image">
+                <img src="{{img.image.url}}" class="img-fluid" alt="Responsive image">
 
               {% endfor %}
+              <h3><a class="article-title" href="{% url 'post_detail' post.id %}">{{ post.caption }}</a></h3>
           </div>
 
         </article>
-        <hr/>
+        <form method="POST">
+            {% csrf_token %}
+            <button type="submit"  id="like_button{{post.id}}" value="{{post.id}}">
+                {%if request.user in post.likes.all %}
+                    Unlike({{post.likes.count}})
+                {%else%}
+                    Like({{post.likes.count}})
+                {%endif%}
+            </button>
+        </form>
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" id="cmt{{post.slug}}" placeholder="Write your comment!">
+            <button type="submit" id="cbtn{{post.slug}}" value="{{post.slug}}" > Comment </button>
+        </form>
+            <br>
+            Comments:
+            <br>
+        <ul id = 'cmtls{{post.slug}}' >
+        {% for comment in post.comments.all %}
+
+            <li><a href="{{comment.commenter.profile.get_absolute_url}}">@{{comment.commenter}}</a>: {{comment.body}}</li>
+
+        {% endfor %}
+        </ul>
+
     {% endfor %}
     <div class="mb-3 mt-0 pb-2">
 
@@ -51,4 +80,59 @@
 
   </div>
 
+
+
 {% endblock content %}
+
+{% block script %}
+    <script type="text/javascript">
+      $(document).ready(function(event){
+
+        //For Ajax LIKE
+
+          {% for post in posts %}
+            $(document).on('click', '#like_button{{ post.id }}', function(event){
+              event.preventDefault();
+              var post_id=$(this).attr('value');
+              $.ajax({
+                type:'POST',
+                url : '{% url "post_like" %}',
+                data:{'post_id':post_id, 'csrfmiddlewaretoken':'{{ csrf_token }}' },
+                dataType: 'json',
+                success: function(data){
+                    if (data.is_liked){
+                        document.getElementById("like_button{{post.id}}").innerHTML = `Unlike(${data.countLike})`;
+                    }
+                    else{
+                        document.getElementById("like_button{{post.id}}").innerHTML = `Like(${data.countLike})`;
+                    }
+                },
+                });
+             });
+           {% endfor %}
+
+
+           //for comment
+
+
+           {% for post in posts %}
+            $(document).on('click', '#cbtn{{ post.slug }}', function(event){
+              event.preventDefault();
+              var post_slug=$(this).attr('value');
+              var comment = $('#cmt{{ post.slug }}').val();
+
+              $.ajax({
+                type:'POST',
+                url : '{% url "post_comment" %}',
+                data:{'post_slug':post_slug, 'comment':comment, 'csrfmiddlewaretoken':'{{ csrf_token }}' },
+                dataType: 'json',
+                success: function(data){
+                    ls = `<li><a href="{{user.profile.get_absolute_url}}">@${data.commenter}: ${comment}</a></li>`;
+                    $('#cmtls{{post.slug}}').append(ls);
+                },
+                });
+             });
+           {% endfor %}});
+    </script>
+{% endblock %}
+

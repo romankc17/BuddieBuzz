@@ -25,7 +25,7 @@ from post.views import PostListView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('account/', include('account.urls')),
-    path('<str:the_slug>/', profile_view, name='profile'),
+    path('user/<str:the_slug>/', profile_view, name='profile'),
     path('post/', include('post.urls')),
     path('', PostListView.as_view(), name='home')
 ]
