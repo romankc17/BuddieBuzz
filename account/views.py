@@ -20,10 +20,7 @@ def register(request):
             u_form.save()
             messages.success(request, 'Account created for '+user_)
             return redirect('login')
-        else:
-            for error in u_form.error_messages:
-                print(error)
-                messages.error(request, error)
+
     else:
         u_form = CreateUserForm()
     context={'u_form':u_form}
@@ -73,7 +70,7 @@ def profile_update(request):
 			u_form.save()
 			p_form.save()
 			messages.success(request, f'Your account has been updated!!')
-			return redirect('profile')
+			return redirect('profile', the_slug = request.user)
 
 
 	else:
@@ -85,7 +82,6 @@ def profile_update(request):
 		'u_form': u_form,
 		'p_form': p_form
 	}
-
 	return render(request, 'account/profile_update.html', context)
 
 

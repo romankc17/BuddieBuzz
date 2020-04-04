@@ -21,8 +21,8 @@
       
       {% if object.author == user %}
        <div>
-        <a class = "btn btn-secondary btn-sm my-1" href="{% url 'post_update' object.id %}">Edit</a>
-        <a class = "btn btn-danger btn-sm my-1" href="{% url 'post_delete' object.id %}">Delete</a>
+        <a class = "btn btn-secondary btn-sm my-1" href="{% url 'post_update' object.slug %}">Edit</a>
+        <a class = "btn btn-danger btn-sm my-1" href="{% url 'post_delete' object.slug %}">Delete</a>
        </div>
       {% endif %}
       {% for img in object.image_set.all %}

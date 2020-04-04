@@ -1,18 +1,25 @@
 {%extends 'base.html' %}
+
 {% load static %}
+
 {%block title%}BuddieBuzz SIGNUP{%endblock%}
 {% load widget_tweaks %}
 
 {%block static%}
-
+	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'account/css/signup.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
 {% endblock %}
 
-{%block content%}}
+{%block content%}
 
-	<div class="container">
+
+
+
+
+	<div class="container hidden-xs-down">
 		<div class="img">
 			<img src="{% static 'account/img/bg.svg' %}">
 		</div>
@@ -23,54 +30,98 @@
 
 				<h3>Create an Account :</h3>
 
-					{%for message in u_form.error_messages%}
-					  <div class="alert alert-{{message.tags}}">
-						{{message}}
-					  </div>
-					{%endfor%}
-           		<div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-user"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>First</h5>
-<!--           		   		<input type="text" class="input">-->
-					   		{{u_form.first_name|attr:"class:input"}}
-           		   </div>
+<!--{% if u_form.errors %}-->
+<!--				<div class="alert alert-danger alert-dismissible col-12 mx-1" role="alert">-->
+<!--    {% for field in u_form %}-->
+<!--        {% for error in field.errors %}-->
+<!--                <strong>{{ error|escape }}</strong>-->
+<!--&lt;!&ndash;				<button type="button" class="close" data-dismiss="alert" aria-label="Close">&ndash;&gt;-->
+<!--&lt;!&ndash;            <span aria-hidden="true">&times;</span>&ndash;&gt;-->
+<!--&lt;!&ndash;        </button>&ndash;&gt;-->
+<!--        {% endfor %}-->
+<!--				</div>-->
 
-           		</div>
+<!--    {% endfor %}-->
+<!--&lt;!&ndash;    {% for error in u_form.non_field_errors %}&ndash;&gt;-->
+<!--&lt;!&ndash;        <div class="alert alert-danger">&ndash;&gt;-->
+<!--&lt;!&ndash;            <strong>{{ error|escape }}</strong>&ndash;&gt;-->
+<!--&lt;!&ndash;        </div>&ndash;&gt;-->
+<!--&lt;!&ndash;    {% endfor %}&ndash;&gt;-->
+<!--{% endif %}-->
 
-				<div class="input-div one">
-           		   <div class="i">
-           		   		<i class="fas fa-user"></i>
-           		   </div>
-           		   <div class="div">
-           		   		<h5>Last Name</h5>
-<!--           		   		<input type="text" class="input">-->
-					   		{{u_form.last_name|attr:"class:input"}}
-           		   </div>
 
-           		</div>
 
-           		<div class="input-div mail">
+
+				{% if u_form.errors %}
+					<div class="my-0 py-0 alert alert-danger alert-dismissible col-12 mx-1" role="alert">
+						<div id="form_errors">
+							{% for field in u_form %}
+								{% for error in field.errors %}
+								<div class="my-0 fieldWrapper">
+									{{ error }}
+								</div>
+							{% endfor %}
+							{% endfor %}
+						</div>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				{% endif %}
+
+
+
+
+<!--           		<div class="input-div one fstname">-->
+<!--           		   <div class="i">-->
+<!--           		   		<i class="fas fa-user"></i>-->
+<!--           		   </div>-->
+<!--           		   <div class="div ">-->
+<!--           		   		<h5>Full Name</h5>-->
+<!--&lt;!&ndash;           		   		<input type="text" class="input">&ndash;&gt;-->
+<!--					   		{{u_form.first_name|attr:"class:input"}}-->
+<!--           		   </div>-->
+<!--				</div>-->
+<!--				<div class = 'input-div one lstname'>-->
+
+<!--					<div class="i">-->
+<!--           		   		<i class="fas fa-user"></i>-->
+<!--           		   </div>-->
+
+<!--           		   <div class="div ">-->
+<!--           		   		<h5>Last Name</h5>-->
+<!--&lt;!&ndash;           		   		<input type="text" class="input">&ndash;&gt;-->
+<!--					   		{{u_form.last_name|attr:"class:input"}}-->
+<!--           		   </div>-->
+
+<!--           		</div>-->
+
+<!--				<div class="input-div one">-->
+<!--           		   -->
+
+<!--           		</div>-->
+
+
+				<div class="input-div username">
+					<div class="i">
+						 <i class="fas fa-at"></i>
+					</div>
+					<div class="div">
+<!--						 <h5>Username</h5>-->
+						 {% render_field u_form.username  placeholder='Username' %}
+				 </div>
+			  </div>
+
+			<div class="input-div mail">
            		   <div class="i">
            		    	<i class="fas fa-envelope"></i>
            		   </div>
            		   <div class="div">
            		    	<h5>Email</h5>
 <!--           		    	<input type="text" class="input">-->
-					   	{{u_form.email}}
+					   	{{u_form.email|attr:"class:input"}}
 				   </div>
 				</div>
-				<div class="input-div username">
-					<div class="i">
-						 <i class="fas fa-at"></i>
-					</div>
-					<div class="div">
-						 <h5>Username</h5>
-						 {{u_form.username}}
-				 </div>
-			  </div>
 				   <div class="input-div pass">
 					<div class="i">
 							<i class="fas fa-lock"></i>
@@ -100,30 +151,6 @@
 
 {%endblock%}
 {%block script%}
-	<script >
-
-		const inputs = document.querySelectorAll(".input");
-
-
-		function addcl(){
-			let parent = this.parentNode.parentNode;
-			parent.classList.add("focus");
-		}
-
-		function remcl(){
-			let parent = this.parentNode.parentNode;
-			if(this.value == ""){
-				parent.classList.remove("focus");
-			}
-		}
-
-
-		inputs.forEach(input => {
-			input.addEventListener("focus", addcl);
-			input.addEventListener("blur", remcl);
-		});
-
-
-	</script>
+	<script src="{% static 'account/js/signup.js' %}"></script>
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
 {%endblock%}
