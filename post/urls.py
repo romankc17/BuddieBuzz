@@ -10,5 +10,6 @@ urlpatterns=[
     path('<int:pk>/update/', PostUpdateView.as_view(), name='post_update'),
     path('<int:pk>/delete/', PostDeleteView.as_view(), name='post_delete'),
     path('p/like/', ajax.like, name = 'post_like'),
-    path('comment/', ajax.post_comment, name='post_comment')
+    path('comment/', ajax.post_comment, name='post_comment'),
+    path('comment/delete', ajax.post_comment_delete, name = 'post_comment_delete')
 ]

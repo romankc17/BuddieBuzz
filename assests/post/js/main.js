@@ -1,7 +1,6 @@
 <script type="text/javascript">
       $(document).ready(function(event){
-        var comments = document.getElementsByClassName("pCmt");
-        for (var i = 0; i < comments.length; i++) {
+      {% for post in posts %}
         $(document).on('click', '#like_button{{ post.id }}', function(event){
           event.preventDefault();
           var post_id=$(this).attr('value');
@@ -20,6 +19,6 @@
             },
             });
          });
-         };
+         {% endfor %}
         });
     </script>

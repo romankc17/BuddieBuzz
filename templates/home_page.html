@@ -51,7 +51,17 @@
         <ul id = 'cmtls{{post.slug}}' >
         {% for comment in post.comments.all %}
 
-            <li><a href="{{comment.commenter.profile.get_absolute_url}}">@{{comment.commenter}}</a>: {{comment.body}}</li>
+            <li class="my-2"><a href="{{comment.commenter.profile.get_absolute_url}}">
+                @{{comment.commenter}}</a>: {{comment.body}}
+                {%if request.user == comment.commenter.profile.user %} <button class="mx-3 btn btn-sm  ">Delete</button>{%endif%}
+                <button class="btn btn-primary">
+                    {%if request.user in comment.likes.all %}
+                        UnLike({{comment.likes.count}})
+                    {% else %}
+                        Like({{comment.likes.count}})
+                    {% endif %}
+                </button>
+            </li>
 
         {% endfor %}
         </ul>
@@ -129,10 +139,12 @@
                 success: function(data){
                     ls = `<li><a href="{{user.profile.get_absolute_url}}">@${data.commenter}: ${comment}</a></li>`;
                     $('#cmtls{{post.slug}}').append(ls);
+                    document.getElementById('cmt{{ post.slug }}').value =" ";
                 },
                 });
              });
            {% endfor %}});
     </script>
+    <script src="{% static 'post/js/main.js' %}"></script>
 {% endblock %}
 

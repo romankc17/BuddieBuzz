@@ -37,3 +37,8 @@ def post_comment(request):
         data = {'commenter':request.user.username}
 
         return JsonResponse(data)
+
+def post_comment_delete(request, id):
+    if request.method == 'GET' and request.is_ajax:
+        comment = PostComment.objects.get(id = id)
+        comment.delete()

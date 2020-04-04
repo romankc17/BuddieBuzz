@@ -13,7 +13,7 @@ from django.views.generic import (
     edit)
 
 from .forms import PostForm, ImageForm
-from .models import Post, Image
+from .models import Post, Image, PostComment
 
 
 class PostListView(ListView):
@@ -91,3 +91,4 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == post.author:
             return True
         return False
+

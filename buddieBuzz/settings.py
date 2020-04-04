@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 
     'django_countries',
     'widget_tweaks',
+    'crispy_forms',
 
     'account',
     'post',

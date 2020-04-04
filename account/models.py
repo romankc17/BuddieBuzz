@@ -1,20 +1,18 @@
 from PIL import Image
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 from django.urls import reverse
 from django_countries.fields import CountryField
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image= models.ImageField(upload_to='profile_image', default='default.jpg')
-    first_name = models.CharField(max_length=50)
-    middle_name = models.CharField(max_length=50,blank=True)
-    last_name = models.CharField(max_length=50)
     followings = models.ManyToManyField('self', blank=True,default=None, symmetrical=False, related_name='+')
     followers = models.ManyToManyField('self', blank = True,default=None, symmetrical=False,related_name='+')
     bio = models.TextField(max_length=100,blank=True )
-    phone_number = models.IntegerField(null=True)
-    dob = models.DateField()
+    phone_number = models.IntegerField(null=True, blank=True)
+    dob = models.DateField(blank=True, null=True)
     GENDER = [
         ('M', 'Male'),
         ('F','Female'),
@@ -22,7 +20,7 @@ class Profile(models.Model):
     ]
     city = models.CharField(blank=True, null = True, max_length=20)
     country = CountryField(blank_label='SELECT COUNTRY', null=True)
-    gender = models.CharField(max_length=1, choices=GENDER, verbose_name='Gender')
+    gender = models.CharField(max_length=1, choices=GENDER, verbose_name='Gender', blank=True)
 
     def is_friend(self, request_profile):
         return (request_profile in self.followers.all() and request_profile in self.followings.all())
@@ -55,3 +53,8 @@ class Profile(models.Model):
             img.thumbnail(output_size)
             img.save(self.image.path)
 
+def create_profile(sender, **kwargs):
+    if kwargs['created']:
+        user_profile = Profile.objects.create(user = kwargs['instance'])
+
+post_save.connect(create_profile, sender = User)
