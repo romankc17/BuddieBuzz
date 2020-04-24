@@ -16,14 +16,14 @@ from .forms import PostForm, ImageForm
 from .models import Post, Image, PostComment
 
 
-class PostListView(ListView):
+class PostListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = 'home_page.html'
     context_object_name = 'posts'
     ordering = ['-created']
     paginate_by = 8
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin, DetailView, ):
 	model = Post
 
 @login_required

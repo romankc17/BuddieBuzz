@@ -26,7 +26,7 @@
                 <img src="{{img.image.url}}" class="img-fluid" alt="Responsive image">
 
               {% endfor %}
-              <h3><a class="article-title" href="{% url 'post_detail' post.id %}">{{ post.caption }}</a></h3>
+              <h3><a class="article-title" href="{{post.get_absolute_url}}">{{ post.caption }}</a></h3>
           </div>
 
         </article>
@@ -137,7 +137,7 @@
                 data:{'post_slug':post_slug, 'comment':comment, 'csrfmiddlewaretoken':'{{ csrf_token }}' },
                 dataType: 'json',
                 success: function(data){
-                    ls = `<li><a href="{{user.profile.get_absolute_url}}">@${data.commenter}: ${comment}</a></li>`;
+                    ls = `<li><a href="{{user.profile.get_absolute_url}}">@${data.commenter}</a>: ${comment}</li>`;
                     $('#cmtls{{post.slug}}').append(ls);
                     document.getElementById('cmt{{ post.slug }}').value =" ";
                 },

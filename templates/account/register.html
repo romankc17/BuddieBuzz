@@ -1,21 +1,46 @@
-{%extends 'base.html' %}
-
+<!doctype html>
 {% load static %}
-
-{%block title%}BuddieBuzz SIGNUP{%endblock%}
 {% load widget_tweaks %}
+<html lang="en">
 
-{%block static%}
-	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+<head>
+	<title>BuddieBuzz-SignUp</title>
+    <!-- favicon of page -->
+    <link rel="shortcut icon" href="buddiebuzz3.png" type="image/x-icon">
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+
+    <!-- linking external css to the page -->
+    <link rel="stylesheet" href="{% static 'post/css/base.css' %}">
+
+    <!-- font awesome link for navigations bar icons  -->
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+ <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="{% static 'account/css/signup.css' %}">
 	<link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-{% endblock %}
 
-{%block content%}
+</head>
 
-
+<body>
 
 
 
@@ -29,26 +54,6 @@
 				<img src="{% static 'account/img/avatar.png' %}">
 
 				<h3>Create an Account :</h3>
-
-<!--{% if u_form.errors %}-->
-<!--				<div class="alert alert-danger alert-dismissible col-12 mx-1" role="alert">-->
-<!--    {% for field in u_form %}-->
-<!--        {% for error in field.errors %}-->
-<!--                <strong>{{ error|escape }}</strong>-->
-<!--&lt;!&ndash;				<button type="button" class="close" data-dismiss="alert" aria-label="Close">&ndash;&gt;-->
-<!--&lt;!&ndash;            <span aria-hidden="true">&times;</span>&ndash;&gt;-->
-<!--&lt;!&ndash;        </button>&ndash;&gt;-->
-<!--        {% endfor %}-->
-<!--				</div>-->
-
-<!--    {% endfor %}-->
-<!--&lt;!&ndash;    {% for error in u_form.non_field_errors %}&ndash;&gt;-->
-<!--&lt;!&ndash;        <div class="alert alert-danger">&ndash;&gt;-->
-<!--&lt;!&ndash;            <strong>{{ error|escape }}</strong>&ndash;&gt;-->
-<!--&lt;!&ndash;        </div>&ndash;&gt;-->
-<!--&lt;!&ndash;    {% endfor %}&ndash;&gt;-->
-<!--{% endif %}-->
-
 
 
 
@@ -69,37 +74,6 @@
 					</div>
 				{% endif %}
 
-
-
-
-<!--           		<div class="input-div one fstname">-->
-<!--           		   <div class="i">-->
-<!--           		   		<i class="fas fa-user"></i>-->
-<!--           		   </div>-->
-<!--           		   <div class="div ">-->
-<!--           		   		<h5>Full Name</h5>-->
-<!--&lt;!&ndash;           		   		<input type="text" class="input">&ndash;&gt;-->
-<!--					   		{{u_form.first_name|attr:"class:input"}}-->
-<!--           		   </div>-->
-<!--				</div>-->
-<!--				<div class = 'input-div one lstname'>-->
-
-<!--					<div class="i">-->
-<!--           		   		<i class="fas fa-user"></i>-->
-<!--           		   </div>-->
-
-<!--           		   <div class="div ">-->
-<!--           		   		<h5>Last Name</h5>-->
-<!--&lt;!&ndash;           		   		<input type="text" class="input">&ndash;&gt;-->
-<!--					   		{{u_form.last_name|attr:"class:input"}}-->
-<!--           		   </div>-->
-
-<!--           		</div>-->
-
-<!--				<div class="input-div one">-->
-<!--           		   -->
-
-<!--           		</div>-->
 
 
 				<div class="input-div username">
@@ -149,8 +123,8 @@
         </div>
     </div>
 
-{%endblock%}
-{%block script%}
 	<script src="{% static 'account/js/signup.js' %}"></script>
 	<script src="https://kit.fontawesome.com/a81368914c.js"></script>
-{%endblock%}
+
+</body>
+</html>
