@@ -1,0 +1,48 @@
+
+/* navbar */
+nav{
+    background-color: #6C63FF;
+    /* max-width: max-content ; */
+}
+
+.nav-wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+
+/* search bar size according to the viewport */
+.search
+{
+    color: black;
+    background-color: white;
+    border-radius: 2em 0em 0em 2em;
+    width:40vw;
+}
+
+.search-icon
+{
+    color: black;
+    background-color: white;
+    border-radius: 0em 2em 2em 0em;
+    max-height: 38px;
+
+}
+
+
+/* font awesome icons */
+.icons
+{
+    font-size: 1.4em;
+    color:white;
+}
+
+
+/* profile image size according to viewport size  */
+.profile-img
+{
+    max-height: 60px;
+    max-width: 60px;
+}
+
+
+
